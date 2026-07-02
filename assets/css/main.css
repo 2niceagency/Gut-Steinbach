@@ -7,25 +7,32 @@
 /* ---------- Fonts (self-hosted, variable) ---------- */
 
 @font-face {
-  font-family: 'Fraunces';
+  font-family: 'Cormorant';
   font-style: normal;
-  font-weight: 300 600;
+  font-weight: 300 700;
   font-display: swap;
-  src: url('../fonts/fraunces-var.woff2') format('woff2');
+  src: url('../fonts/cormorant-var.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Fraunces';
+  font-family: 'Cormorant';
   font-style: italic;
-  font-weight: 300 600;
+  font-weight: 300 700;
   font-display: swap;
-  src: url('../fonts/fraunces-italic-var.woff2') format('woff2');
+  src: url('../fonts/cormorant-italic-var.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Archivo';
+  font-family: 'Jost';
   font-style: normal;
-  font-weight: 400 600;
+  font-weight: 300 600;
   font-display: swap;
-  src: url('../fonts/archivo-var.woff2') format('woff2');
+  src: url('../fonts/jost-var.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Jost';
+  font-style: italic;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('../fonts/jost-italic-var.woff2') format('woff2');
 }
 
 /* ---------- Tokens ---------- */
@@ -44,18 +51,18 @@
   --ink: #22291f;
   --weiss: #fffdf8;
 
-  --serif: 'Fraunces', 'Times New Roman', serif;
-  --sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --serif: 'Cormorant', 'Times New Roman', serif;
+  --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
 
-  /* Fluid type */
-  --fs-hero: clamp(2.6rem, 7.2vw, 6.4rem);
-  --fs-display: clamp(2.2rem, 5.4vw, 4.6rem);
-  --fs-h2: clamp(1.9rem, 4.2vw, 3.4rem);
-  --fs-h3: clamp(1.35rem, 2.4vw, 1.9rem);
-  --fs-lead: clamp(1.1rem, 1.7vw, 1.375rem);
+  /* Fluid type — Cormorant Garamond läuft schmaler/leichter, daher etwas größer */
+  --fs-hero: clamp(3rem, 8.4vw, 7.4rem);
+  --fs-display: clamp(2.5rem, 6vw, 5.4rem);
+  --fs-h2: clamp(2.2rem, 4.8vw, 4rem);
+  --fs-h3: clamp(1.5rem, 2.6vw, 2.15rem);
+  --fs-lead: clamp(1.1rem, 1.7vw, 1.4rem);
   --fs-body: clamp(1rem, 1.15vw, 1.0625rem);
-  --fs-small: 0.875rem;
-  --fs-label: 0.75rem;
+  --fs-small: 0.8125rem;
+  --fs-label: 0.72rem;
 
   --space-section: clamp(6rem, 12vw, 11rem);
   --space-block: clamp(3rem, 6vw, 5.5rem);
@@ -94,10 +101,10 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--serif);
-  font-weight: 340;
-  line-height: 1.08;
-  letter-spacing: -0.01em;
-  margin: 0 0 0.6em;
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: 0.002em;
+  margin: 0 0 0.5em;
   text-wrap: balance;
 }
 
@@ -109,7 +116,7 @@ a { color: inherit; }
 em, .accent-i {
   font-family: var(--serif);
   font-style: italic;
-  font-weight: 380;
+  font-weight: 500;
 }
 
 :focus-visible {
@@ -404,8 +411,8 @@ em, .accent-i {
 }
 .menu__link {
   font-family: var(--serif);
-  font-size: min(clamp(1.9rem, 4.6vh, 3.1rem), 7.4vw);
-  font-weight: 330;
+  font-size: min(clamp(2.1rem, 5vh, 3.5rem), 8vw);
+  font-weight: 500;
   line-height: 1.28;
   text-decoration: none;
   display: inline-flex;
@@ -490,18 +497,32 @@ em, .accent-i {
   height: 100%;
   object-fit: cover;
   will-change: transform;
+  filter: brightness(0.72) saturate(1.02);
+  transform: scale(1.06);
+  animation: kenburns 22s ease-in-out infinite alternate;
+}
+@keyframes kenburns {
+  from { transform: scale(1.06) translate3d(0, 0, 0); }
+  to   { transform: scale(1.14) translate3d(-1.5%, -1.5%, 0); }
 }
 .hero__scrim {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(19, 30, 23, 0.42) 0%, rgba(19, 30, 23, 0.05) 34%, rgba(19, 30, 23, 0.12) 62%, rgba(19, 30, 23, 0.72) 100%);
+    linear-gradient(180deg, rgba(19, 30, 23, 0.6) 0%, rgba(19, 30, 23, 0.28) 30%, rgba(19, 30, 23, 0.32) 55%, rgba(19, 30, 23, 0.86) 100%);
+}
+.hero__scrim::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 30% 62%, rgba(19,30,23,0.35) 0%, transparent 60%);
 }
 .hero__content {
   position: relative;
   z-index: 2;
   width: 100%;
   padding-bottom: clamp(5.5rem, 11vh, 9rem);
+  text-shadow: 0 1px 30px rgba(15, 24, 18, 0.35);
 }
 .hero__eyebrow {
   display: flex;
@@ -509,30 +530,37 @@ em, .accent-i {
   gap: 1rem;
   font-size: var(--fs-label);
   font-weight: 500;
-  letter-spacing: 0.26em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--messing-hell);
-  margin-bottom: 1.6rem;
+  margin-bottom: clamp(1.8rem, 3vw, 2.6rem);
+  text-shadow: 0 1px 12px rgba(15, 24, 18, 0.55);
 }
 .hero__eyebrow::before {
   content: '';
   width: 2.6rem;
   height: 1px;
   background: currentColor;
+  flex: 0 0 auto;
+  transform-origin: left;
+  animation: linegrow 1s var(--ease-out) 0.2s both;
 }
+@keyframes linegrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .hero h1 {
   font-size: var(--fs-hero);
-  font-weight: 320;
-  max-width: 13em;
-  margin-bottom: 1.4rem;
+  font-weight: 500;
+  line-height: 1.02;
+  max-width: 14em;
+  margin-bottom: 1.5rem;
 }
 .hero__sub {
   font-size: var(--fs-lead);
   font-weight: 400;
   max-width: 34em;
   margin-bottom: 2.4rem;
-  opacity: 0.92;
+  opacity: 0.96;
   text-wrap: pretty;
+  text-shadow: 0 1px 18px rgba(15, 24, 18, 0.5);
 }
 .hero__cta {
   display: flex;
@@ -660,8 +688,8 @@ em, .accent-i {
 }
 .manifest p {
   font-family: var(--serif);
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
-  font-weight: 330;
+  font-size: clamp(1.6rem, 3.2vw, 2.7rem);
+  font-weight: 500;
   line-height: 1.42;
   max-width: 30em;
   margin-inline: auto;
@@ -689,8 +717,8 @@ em, .accent-i {
 }
 .figure__num {
   font-family: var(--serif);
-  font-size: clamp(2.6rem, 5vw, 4.2rem);
-  font-weight: 300;
+  font-size: clamp(2.8rem, 5.4vw, 4.6rem);
+  font-weight: 420;
   line-height: 1;
   color: var(--linen-hell);
   font-variant-numeric: tabular-nums;
@@ -936,7 +964,7 @@ em, .accent-i {
 .ratio-mark {
   font-family: var(--serif);
   font-size: clamp(5rem, 13vw, 11rem);
-  font-weight: 300;
+  font-weight: 440;
   line-height: 0.95;
   letter-spacing: -0.03em;
   color: var(--tanne);
@@ -1075,8 +1103,8 @@ em, .accent-i {
 }
 .marquee__item {
   font-family: var(--serif);
-  font-size: clamp(1.3rem, 2.4vw, 2rem);
-  font-weight: 330;
+  font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+  font-weight: 500;
   white-space: nowrap;
   color: var(--tanne);
   display: inline-flex;
@@ -1102,8 +1130,8 @@ em, .accent-i {
 .voice blockquote {
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(1.4rem, 2.6vw, 2rem);
-  font-weight: 330;
+  font-size: clamp(1.55rem, 2.9vw, 2.3rem);
+  font-weight: 500;
   line-height: 1.5;
 }
 .voice figcaption {
@@ -1274,7 +1302,7 @@ em, .accent-i {
 
 .footer-word {
   font-family: var(--serif);
-  font-weight: 300;
+  font-weight: 440;
   font-size: clamp(3.2rem, 11.5vw, 10.5rem);
   line-height: 0.95;
   letter-spacing: 0.01em;
@@ -1352,6 +1380,11 @@ em, .accent-i {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.page-hero__media img {
+  filter: brightness(0.66) saturate(1.02);
+  transform: scale(1.06);
+  animation: kenburns 24s ease-in-out infinite alternate;
 }
 .page-hero .hero__content { padding-bottom: clamp(3.5rem, 7vh, 6rem); }
 .page-hero h1 { font-size: var(--fs-display); max-width: 14em; }
@@ -1449,6 +1482,66 @@ em, .accent-i {
 .cta-band h2 { font-size: var(--fs-h2); max-width: 18em; margin-inline: auto; }
 .cta-band p { max-width: 36em; margin-inline: auto auto 2rem; opacity: 0.9; }
 
+/* ---------- Motion V2 ---------- */
+
+/* Scroll-Fortschritt oben */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--messing), var(--messing-hell));
+  z-index: 110;
+  will-change: transform;
+}
+
+/* Heading- & Chapter-Reveal (per JS beobachtet) */
+.rise {
+  opacity: 0;
+  transform: translateY(1.6rem);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.rise.is-in { opacity: 1; transform: none; }
+
+/* Chapter-Linie zeichnet sich beim Sichtbarwerden */
+.chapter::after { transform: scaleX(0); transform-origin: left; transition: transform 0.9s var(--ease-out) 0.15s; }
+.chapter.is-in::after { transform: scaleX(1); }
+
+/* Wichtige Zahlen/Preise: dezenter Messing-Unterstrich, der beim Reveal einläuft */
+.stay-card__price strong,
+.offer__terms b,
+.menu-facts b {
+  position: relative;
+  display: inline-block;
+}
+.emph-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--messing);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s var(--ease-out);
+}
+.emph-underline.is-in::after { transform: scaleX(1); }
+
+/* Magnetische Buttons (JS setzt --mx/--my) */
+.btn { transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), transform 0.25s var(--ease-out); }
+.btn.is-magnetic { transform: translate(var(--mx, 0), var(--my, 0)); }
+
+/* Sanftes Schweben des Scroll-Hinweises */
+.hero__scroll { animation: floaty 3.4s ease-in-out infinite; }
+@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+/* Ken-Burns/Reveal-Bilder in Frames bekommen leichten Blur-Start */
+.frame img { filter: saturate(1.01); }
+
 /* ---------- Reduced Motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1459,13 +1552,17 @@ em, .accent-i {
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
   }
-  [data-reveal], .lines .line > span, .frame img, .words .w {
+  [data-reveal], .lines .line > span, .frame img, .words .w,
+  .rise, .hero__media img, .page-hero__media img {
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
+    animation: none !important;
   }
+  .chapter::after, .emph-underline::after { transform: scaleX(1) !important; }
   .marquee { animation: none; flex-wrap: wrap; width: auto; }
-  .hero__scroll::after { animation: none; }
+  .hero__scroll, .hero__scroll::after, .hero__eyebrow::before { animation: none; }
+  .scroll-progress { display: none; }
 }
 
 /* ---------- Print ---------- */

@@ -88,6 +88,57 @@
     });
   });
 
+  /* Kapitel-Labels + Überschriften: automatisch beim Scrollen einblenden */
+  document.querySelectorAll('.chapter').forEach(function (el) { io.observe(el); });
+  document.querySelectorAll('.section h2, .split__body h2, .ratio-mark, .voice blockquote')
+    .forEach(function (el) {
+      if (el.closest('[data-reveal]') || el.classList.contains('lines')) return;
+      el.classList.add('rise');
+      io.observe(el);
+    });
+
+  /* Wichtige Preise/Zahlen hervorheben (Unterstrich läuft ein) */
+  document.querySelectorAll('.stay-card__price strong, .offer__terms b, .menu-facts b')
+    .forEach(function (el) { el.classList.add('emph-underline'); io.observe(el); });
+
+  /* Scroll-Fortschrittsbalken */
+  if (!reduceMotion) {
+    var bar = document.createElement('div');
+    bar.className = 'scroll-progress';
+    document.body.appendChild(bar);
+    var barTick = false;
+    function updateProgress() {
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      var p = max > 0 ? h.scrollTop / max : 0;
+      bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+      barTick = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!barTick) { requestAnimationFrame(updateProgress); barTick = true; }
+    }, { passive: true });
+    updateProgress();
+  }
+
+  /* Magnetische Buttons (nur Maus, nicht Touch) */
+  if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.btn').forEach(function (btn) {
+      btn.addEventListener('pointermove', function (e) {
+        var r = btn.getBoundingClientRect();
+        var mx = (e.clientX - r.left - r.width / 2) * 0.18;
+        var my = (e.clientY - r.top - r.height / 2) * 0.28;
+        btn.classList.add('is-magnetic');
+        btn.style.setProperty('--mx', mx.toFixed(1) + 'px');
+        btn.style.setProperty('--my', my.toFixed(1) + 'px');
+      });
+      btn.addEventListener('pointerleave', function () {
+        btn.style.setProperty('--mx', '0px');
+        btn.style.setProperty('--my', '0px');
+        setTimeout(function () { btn.classList.remove('is-magnetic'); }, 250);
+      });
+    });
+  }
+
   /* ---------- Wort-für-Wort-Aufhellung (Manifest) ---------- */
   document.querySelectorAll('.words').forEach(function (el) {
     var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
