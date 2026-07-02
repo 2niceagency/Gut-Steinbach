@@ -47,7 +47,9 @@
   --linen-dunkel: #e7e0cf;
   --messing: #a3824c;
   --messing-hell: #c3a878;
-  --stein: #6c675a;
+  --messing-ink: #7a5a26; /* dunkleres Gold für kleinen Text auf Leinen (WCAG AA) */
+  --stein: #625d51;
+  --stein-alt: #6c675a;
   --ink: #22291f;
   --weiss: #fffdf8;
 
@@ -85,11 +87,11 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
-  overflow-x: clip;
   font-family: var(--sans);
   font-size: var(--fs-body);
   line-height: 1.65;
@@ -174,10 +176,11 @@ em, .accent-i {
 .chapter__num {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   letter-spacing: 0.05em;
-  color: var(--messing);
+  color: var(--messing-ink);
 }
+.section--dark .chapter__num { color: var(--messing-hell); }
 
 /* ---------- Buttons ---------- */
 
@@ -698,7 +701,7 @@ em, .accent-i {
 
 /* Wort-für-Wort-Reveal */
 .words .w {
-  opacity: 0.16;
+  opacity: 0.34;
   transition: opacity 0.5s linear;
 }
 .words .w.is-lit { opacity: 1; }
@@ -1257,7 +1260,7 @@ em, .accent-i {
 @media (min-width: 56em) {
   .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1.2fr; }
 }
-.footer-grid h4 {
+.footer-grid h3 {
   font-family: var(--sans);
   font-size: var(--fs-label);
   font-weight: 500;
