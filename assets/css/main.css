@@ -381,6 +381,20 @@ em, .accent-i {
   .season-panel__lead { font-size: 1.02rem; margin-bottom: 1.2rem; }
   .season-panel__acts { gap: 0.4rem 0; }
   .seasonscroll__inner { padding-bottom: clamp(4rem, 12vh, 7rem); }
+
+  /* Unterseiten-Hero mobil: Headline kleiner + Abstand zum Header,
+     damit die Eyebrow nicht unter Logo/Menü rutscht */
+  .page-hero,
+  .page-hero--tall { min-height: 100svh; }
+  .page-hero .hero__content {
+    padding-top: calc(var(--header-h) + 1rem);
+    padding-bottom: 2.75rem;
+  }
+  .page-hero h1 {
+    font-size: clamp(2rem, 7.6vw, 2.7rem);
+    line-height: 1.16;
+    max-width: 16ch;
+  }
 }
 
 /* Menü-Trigger */
