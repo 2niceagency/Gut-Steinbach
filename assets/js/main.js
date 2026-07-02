@@ -262,17 +262,33 @@
     }, true);
   });
 
-  /* ---------- Hero-Video: Effizienz + reduced motion ---------- */
+  /* ---------- Hero-Video: Autoplay mit sauberem Poster-Fallback ---------- */
   var heroVideo = document.querySelector('.hero__media video');
   if (heroVideo) {
+    // iOS/Autoplay-Anforderungen hart setzen
+    heroVideo.muted = true;
+    heroVideo.setAttribute('muted', '');
+    heroVideo.playsInline = true;
+
+    // Standbild bleibt sichtbar, bis das Video wirklich Bilder liefert.
+    // 'timeupdate' feuert nur während echter Wiedergabe -> zuverlässigstes Signal.
+    var revealVideo = function () { heroVideo.classList.add('is-playing'); };
+    heroVideo.addEventListener('playing', revealVideo);
+    heroVideo.addEventListener('timeupdate', function () {
+      if (heroVideo.currentTime > 0.08) revealVideo();
+    });
+
     if (reduceMotion) {
       heroVideo.removeAttribute('autoplay');
-      heroVideo.pause();
     } else {
+      var tryPlay = function () {
+        var pr = heroVideo.play();
+        if (pr && typeof pr.then === 'function') { pr.catch(function () {}); }
+      };
       var vIO = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) { heroVideo.play().catch(function () {}); }
-          else { heroVideo.pause(); }
+          if (entry.isIntersecting) { tryPlay(); }
+          else if (!heroVideo.paused) { heroVideo.pause(); }
         });
       }, { threshold: 0.1 });
       vIO.observe(heroVideo);

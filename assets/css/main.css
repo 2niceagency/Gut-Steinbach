@@ -344,6 +344,30 @@ em, .accent-i {
   .brand__sub { display: none; }
   .header-cta { display: none; }
   .menu-btn { letter-spacing: 0.1em; gap: 0.6rem; }
+
+  /* Hero mobil: ruhiger, mehr Luft */
+  .hero__content { padding-bottom: 2.75rem; }
+  .hero__eyebrow {
+    font-size: 0.64rem;
+    letter-spacing: 0.14em;
+    gap: 0.75rem;
+    margin-bottom: 1.4rem;
+  }
+  .hero__eyebrow::before { width: 1.8rem; }
+  .hero h1 {
+    font-size: clamp(2.3rem, 8.6vw, 3rem);
+    line-height: 1.2;
+    letter-spacing: 0.004em;
+    max-width: 15ch;
+    margin-bottom: 1.5rem;
+  }
+  .hero__sub {
+    font-size: 1.02rem;
+    line-height: 1.6;
+    margin-bottom: 1.9rem;
+  }
+  .hero__cta { gap: 0.85rem; }
+  .hero__cta .btn { width: 100%; justify-content: center; }
 }
 
 /* Menü-Trigger */
@@ -503,6 +527,15 @@ em, .accent-i {
   filter: brightness(0.72) saturate(1.02);
   transform: scale(1.06);
   animation: kenburns 22s ease-in-out infinite alternate;
+}
+/* Video erst zeigen, wenn es tatsächlich läuft — sonst bleibt das Standbild
+   darunter sichtbar (kein iOS-Play-Button im Stromsparmodus). */
+.hero__media video {
+  opacity: 0;
+  transition: opacity 0.7s var(--ease-out);
+}
+.hero__media video.is-playing {
+  opacity: 1;
 }
 @keyframes kenburns {
   from { transform: scale(1.06) translate3d(0, 0, 0); }
