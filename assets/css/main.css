@@ -34,6 +34,13 @@
   font-display: swap;
   src: url('../fonts/jost-italic-var.woff2') format('woff2');
 }
+@font-face {
+  font-family: 'Signature';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/mrs-saint-delafield.woff2') format('woff2');
+}
 
 /* ---------- Tokens ---------- */
 
@@ -368,6 +375,12 @@ em, .accent-i {
   }
   .hero__cta { gap: 0.85rem; }
   .hero__cta .btn { width: 100%; justify-content: center; }
+
+  /* Jahreszeiten-Scroll mobil kompakter */
+  .season-panel h3 { font-size: clamp(1.9rem, 7.6vw, 2.6rem); line-height: 1.1; }
+  .season-panel__lead { font-size: 1.02rem; margin-bottom: 1.2rem; }
+  .season-panel__acts { gap: 0.4rem 0; }
+  .seasonscroll__inner { padding-bottom: clamp(4rem, 12vh, 7rem); }
 }
 
 /* Menü-Trigger */
@@ -1112,6 +1125,248 @@ em, .accent-i {
   font-weight: 400;
 }
 .menu-facts span { font-size: var(--fs-small); color: var(--stein); }
+
+/* ---------- Brief des Direktors ---------- */
+
+.letter {
+  position: relative;
+  overflow: hidden;
+}
+.letter__grid {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: center;
+}
+@media (min-width: 60em) {
+  .letter__grid { grid-template-columns: 0.82fr 1.18fr; }
+}
+.letter__portrait {
+  position: relative;
+}
+.letter__portrait .frame { aspect-ratio: 4 / 5; }
+.letter__seal {
+  position: absolute;
+  right: clamp(-0.75rem, -1vw, -1.25rem);
+  bottom: clamp(-0.75rem, -1vw, -1.25rem);
+  width: clamp(5rem, 8vw, 7rem);
+  height: auto;
+  filter: drop-shadow(0 8px 20px rgba(19,30,23,0.3));
+}
+.letter__body {
+  max-width: 40rem;
+}
+.letter__salute {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  color: var(--tanne);
+  margin-bottom: 1.4rem;
+}
+.letter__text p {
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  color: var(--tanne-hell);
+  margin-bottom: 1.15rem;
+}
+.section--dark .letter__salute { color: var(--linen-hell); }
+.section--dark .letter__text p { color: rgba(242, 237, 225, 0.82); }
+.letter__sign {
+  margin-top: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.letter__signature {
+  font-family: 'Signature', var(--serif);
+  font-size: clamp(3rem, 6vw, 4.6rem);
+  line-height: 0.8;
+  color: var(--messing);
+  margin-bottom: 0.4rem;
+}
+.section--dark .letter__signature { color: var(--messing-hell); }
+.letter__name {
+  font-family: var(--sans);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.letter__role {
+  font-size: var(--fs-small);
+  color: var(--stein);
+  letter-spacing: 0.05em;
+}
+.section--dark .letter__role { color: rgba(242, 237, 225, 0.6); }
+
+/* ---------- Jahreszeiten-Scroll (gepinnt) ---------- */
+
+.seasonscroll {
+  position: relative;
+  background: var(--tanne-tief);
+  color: var(--linen-hell);
+  height: 400svh; /* 4 Jahreszeiten × Viewport */
+}
+.seasonscroll__viewport {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+.seasonscroll__layer {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.seasonscroll__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 0.9s var(--ease-inout), transform 1.4s var(--ease-out);
+  filter: brightness(0.6);
+}
+.seasonscroll__img.is-active { opacity: 1; transform: scale(1); }
+.seasonscroll__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(19,30,23,0.5) 0%, rgba(19,30,23,0.15) 40%, rgba(19,30,23,0.75) 100%);
+}
+.seasonscroll__inner {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: clamp(3rem, 8vh, 6rem);
+}
+.seasonscroll__rail {
+  position: absolute;
+  top: 50%;
+  right: clamp(1.25rem, 4vw, 4rem);
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  z-index: 3;
+}
+.seasonscroll__dot {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(242, 237, 225, 0.55);
+  transition: color 0.4s;
+  justify-content: flex-end;
+}
+.seasonscroll__dot::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  transition: background 0.4s, transform 0.4s;
+}
+.seasonscroll__dot.is-active { color: var(--messing-hell); }
+.seasonscroll__dot.is-active::after { background: var(--messing-hell); transform: scale(1.3); }
+@media (max-width: 40em) {
+  .seasonscroll__dot { font-size: 0; gap: 0; }
+}
+
+.season-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(3rem, 8vh, 6rem);
+  opacity: 0;
+  transform: translateY(1.1rem);
+  transition: opacity 0.45s var(--ease-out), transform 0.55s var(--ease-out);
+  pointer-events: none;
+}
+.season-panel.is-active { opacity: 1; transform: none; pointer-events: auto; }
+.season-panel__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--messing-hell);
+  margin-bottom: 1.1rem;
+}
+.season-panel__eyebrow::before { content: ''; width: 2.4rem; height: 1px; background: currentColor; }
+.season-panel h3 {
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  font-weight: 420;
+  line-height: 1.02;
+  margin-bottom: 1rem;
+  max-width: 14ch;
+  text-shadow: 0 1px 24px rgba(15,24,18,0.5);
+}
+.season-panel__lead {
+  font-family: var(--serif);
+  font-size: var(--fs-lead);
+  font-weight: 350;
+  max-width: 30em;
+  margin-bottom: 1.6rem;
+  text-shadow: 0 1px 18px rgba(15,24,18,0.5);
+}
+.season-panel__acts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0;
+  max-width: 46rem;
+}
+.season-panel__acts li {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--fs-small);
+  color: rgba(242, 237, 225, 0.9);
+}
+.season-panel__acts li:not(:last-child)::after {
+  content: '·';
+  margin-inline: 0.9rem;
+  color: var(--messing-hell);
+}
+.seasonscroll__hint {
+  position: absolute;
+  left: 50%;
+  bottom: 1.4rem;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(242, 237, 225, 0.6);
+}
+
+/* Reduced-Motion: gestapelte Panels statt gepinntem Crossfade */
+.seasonscroll.is-static { height: auto; }
+.seasonscroll.is-static .seasonscroll__viewport { position: static; height: auto; overflow: visible; }
+.seasonscroll.is-static .seasonscroll__img { display: none; }
+.seasonscroll.is-static .seasonscroll__img.is-active { display: block; opacity: 0.35; }
+.seasonscroll.is-static .seasonscroll__rail,
+.seasonscroll.is-static .seasonscroll__hint { display: none; }
+.seasonscroll.is-static .seasonscroll__inner { display: block; padding-block: 0; }
+.seasonscroll.is-static .season-panel {
+  position: static;
+  opacity: 1;
+  transform: none;
+  padding-block: clamp(2.5rem, 6vh, 4.5rem);
+  border-top: 1px solid rgba(242, 237, 225, 0.14);
+}
+.seasonscroll.is-static .season-panel:first-of-type { border-top: 0; padding-top: clamp(4rem, 9vh, 7rem); }
 
 /* ---------- Jahreszeiten: zwei Panele ---------- */
 

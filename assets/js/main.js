@@ -329,6 +329,47 @@
     });
   }
 
+  /* ---------- Jahreszeiten-Scroll (gepinnt, Crossfade) ---------- */
+  document.querySelectorAll('[data-seasonscroll]').forEach(function (sec) {
+    var imgs = sec.querySelectorAll('.seasonscroll__img');
+    var panels = sec.querySelectorAll('.season-panel');
+    var dots = sec.querySelectorAll('.seasonscroll__dot');
+    var count = panels.length;
+
+    if (reduceMotion) {
+      sec.classList.add('is-static');
+      panels.forEach(function (p) { p.classList.add('is-active'); });
+      return;
+    }
+
+    var current = 0;
+    function setActive(i) {
+      if (i === current) return;
+      current = i;
+      [imgs, panels, dots].forEach(function (group) {
+        group.forEach(function (el, idx) {
+          el.classList.toggle('is-active', idx === i);
+        });
+      });
+    }
+
+    var ticking = false;
+    function update() {
+      var rect = sec.getBoundingClientRect();
+      var scrollable = sec.offsetHeight - window.innerHeight;
+      var scrolled = -rect.top;
+      var progress = scrollable > 0 ? scrolled / scrollable : 0;
+      progress = Math.max(0, Math.min(0.9999, progress));
+      setActive(Math.min(count - 1, Math.floor(progress * count)));
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  });
+
   /* ---------- Jahr im Footer ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();

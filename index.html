@@ -256,6 +256,32 @@
       </div>
     </section>
 
+    <!-- ================= BRIEF DES DIREKTORS ================= -->
+    <section class="section section--linen letter" aria-labelledby="letter-h">
+      <div class="wrap letter__grid">
+        <div class="letter__portrait" data-reveal>
+          <div class="frame frame--34">
+            <img src="assets/img/gut-gast-natur.webp" alt="Gastgeber am Gut Steinbach in der Chiemgauer Landschaft" loading="lazy" width="1400" height="2098">
+          </div>
+          <img class="letter__seal" src="assets/img/logo-shield-gold.png" alt="" width="379" height="413" loading="lazy">
+        </div>
+        <div class="letter__body">
+          <p class="chapter"><span class="chapter__num">—</span> Ein Wort zum Willkommen</p>
+          <p class="letter__salute" id="letter-h">Schön, dass Sie da sind.</p>
+          <div class="letter__text">
+            <p>Manche Häuser empfangen ihre Gäste mit Marmor und Hochglanz. Wir empfangen Sie mit dem Geruch von frisch gemähtem Heu, dem Knistern eines Kachelofens und einem Frühstücksei von unseren eigenen Hühnern.</p>
+            <p>Gut Steinbach wird seit 1435 bewirtschaftet. Diese Beständigkeit ist unser Selbstverständnis: Wir bauen die Geschichte nicht um, wir führen sie weiter. 51 Hektar Land, eine eigene Landwirtschaft, eine Küche, die weiß, wo jede Zutat gewachsen ist. Gemeinsam mit der Familie von Moltke verstehen wir Luxus nicht als mehr Ausstattung, sondern als mehr Echtheit.</p>
+            <p>Was ich mir für Ihren Aufenthalt wünsche? Dass Sie wirklich ankommen. Nicht nur mit dem Auto, sondern innerlich. Dass Sie eine Nacht besser schlafen als sonst und morgens einen Moment brauchen, um sich zu erinnern, welcher Wochentag ist. Dafür ist das ganze Team da, und dafür bin ich hier.</p>
+          </div>
+          <div class="letter__sign">
+            <span class="letter__signature" aria-hidden="true">Chris Franzen</span>
+            <span class="letter__name">Chris Franzen</span>
+            <span class="letter__role">Direktor · Gut Steinbach</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ================= ÜBERNACHTEN ================= -->
     <section class="section">
       <div class="wrap">
@@ -408,27 +434,60 @@
       </div>
     </section>
 
-    <!-- ================= JAHRESZEITEN ================= -->
-    <section aria-label="Sommer und Winter im Chiemgau">
-      <div class="seasons">
-        <a class="season" href="region.html#sommer">
-          <img src="assets/img/sommer-wandern.webp" alt="Wanderer auf einem Bergpfad über Reit im Winkl im Sommer" loading="lazy" width="1800" height="1200">
-          <div class="season__body">
-            <p class="chapter" style="color:var(--messing-hell);margin-bottom:1rem;"><span class="chapter__num">06</span> Sommer</p>
-            <h3>200 Kilometer Wanderwege, und abends: die Terrasse.</h3>
-            <p>530 Kilometer Bike-Routen, Bergseen, Almhütten, Golf mit Panorama.</p>
-            <span class="tlink" style="color:var(--linen-hell);">Sommer erleben <span class="arr" aria-hidden="true">→</span></span>
+    <!-- ================= JAHRESZEITEN-SCROLL ================= -->
+    <section class="seasonscroll" id="jahreszeiten" aria-label="Die vier Jahreszeiten am Gut Steinbach" data-seasonscroll>
+      <div class="seasonscroll__viewport">
+        <div class="seasonscroll__layer">
+          <img class="seasonscroll__img is-active" data-season="0" src="assets/img/gut-ziegen.webp" alt="Frühling am Gut Steinbach: Tiere auf der Weide" loading="lazy" width="1600" height="1067">
+          <img class="seasonscroll__img" data-season="1" src="assets/img/sommer-wandern.webp" alt="Sommer: Wandern über Reit im Winkl" loading="lazy" width="1800" height="1013">
+          <img class="seasonscroll__img" data-season="2" src="assets/img/landschaft-chiemgau.webp" alt="Herbst: Chiemgauer Alpenlandschaft in warmem Licht" loading="lazy" width="1920" height="1281">
+          <img class="seasonscroll__img" data-season="3" src="assets/img/winter-ski.webp" alt="Winter: Skifahren an der Winklmoosalm" loading="lazy" width="1800" height="1200">
+        </div>
+        <div class="seasonscroll__scrim"></div>
+
+        <div class="seasonscroll__rail" aria-hidden="true">
+          <span class="seasonscroll__dot is-active" data-dot="0">Frühling</span>
+          <span class="seasonscroll__dot" data-dot="1">Sommer</span>
+          <span class="seasonscroll__dot" data-dot="2">Herbst</span>
+          <span class="seasonscroll__dot" data-dot="3">Winter</span>
+        </div>
+
+        <div class="wrap seasonscroll__inner">
+          <div class="season-panel is-active" data-panel="0">
+            <p class="season-panel__eyebrow">Jahreszeiten · 01 Frühling</p>
+            <h3>Wenn der Schnee weicht, kommt das Gut ins Leben zurück.</h3>
+            <p class="season-panel__lead">Die ersten warmen Tage, und über Nacht ist alles grün. Auf der Weide stehen die Tierkinder, im Garten wächst, was abends auf dem Teller liegt.</p>
+            <ul class="season-panel__acts">
+              <li>Kräutergarten neu bepflanzt</li><li>Zicklein &amp; Kälbchen auf der Weide</li><li>Erste Talwanderungen</li><li>Bärlauch- &amp; Spargelwochen im HEIMAT</li>
+            </ul>
           </div>
-        </a>
-        <a class="season" href="region.html#winter">
-          <img src="assets/img/winter-ski.webp" alt="Skifahrer auf der Winklmoosalm bei Sonnenschein" loading="lazy" width="1800" height="1200">
-          <div class="season__body">
-            <p class="chapter" style="color:var(--messing-hell);margin-bottom:1rem;"><span class="chapter__num">07</span> Winter</p>
-            <h3>44 Pistenkilometer vor der Tür, Kitzbühel in 45 Minuten.</h3>
-            <p>Danach: Sauna, Kamin, Stube. In dieser Reihenfolge.</p>
-            <span class="tlink" style="color:var(--linen-hell);">Winter erleben <span class="arr" aria-hidden="true">→</span></span>
+          <div class="season-panel" data-panel="1">
+            <p class="season-panel__eyebrow">Jahreszeiten · 02 Sommer</p>
+            <h3>200 Kilometer Wege, und abends die Terrasse.</h3>
+            <p class="season-panel__lead">Der Chiemgau in voller Weite: früh auf den Berg, mittags an den See, abends ein Glas auf der Sonnenterrasse mit Blick auf die Alpen.</p>
+            <ul class="season-panel__acts">
+              <li>530 km Bike-Routen</li><li>Bergseen &amp; Klammen</li><li>Golf mit Alpenpanorama</li><li>Baden im Naturweiher</li>
+            </ul>
           </div>
-        </a>
+          <div class="season-panel" data-panel="2">
+            <p class="season-panel__eyebrow">Jahreszeiten · 03 Herbst</p>
+            <h3>Der Chiemgau in Kupfer und Gold.</h3>
+            <p class="season-panel__lead">Die ruhigste und vielleicht schönste Zeit. Die Wälder färben sich, die Küche läuft zur Höchstform auf, das Spa gehört fast Ihnen allein.</p>
+            <ul class="season-panel__acts">
+              <li>Wildwochen aus eigener Haltung</li><li>Pilz- &amp; Kräuterwanderungen</li><li>Almabtrieb</li><li>Spa-Tage ohne Andrang</li>
+            </ul>
+          </div>
+          <div class="season-panel" data-panel="3">
+            <p class="season-panel__eyebrow">Jahreszeiten · 04 Winter</p>
+            <h3>44 Pistenkilometer vor der Tür, danach Sauna und Kamin.</h3>
+            <p class="season-panel__lead">Winklmoosalm und Steinplatte beginnen am Gutstor, Kitzbühel liegt 45 Minuten entfernt. Und am Abend wärmt die Stube, in dieser Reihenfolge.</p>
+            <ul class="season-panel__acts">
+              <li>Ski an Winklmoosalm &amp; Steinplatte</li><li>80 km Loipen</li><li>Schneeschuh-Touren</li><li>Rodeln &amp; Glühwein</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="seasonscroll__hint" aria-hidden="true">Weiterscrollen durchs Jahr</p>
       </div>
     </section>
 
