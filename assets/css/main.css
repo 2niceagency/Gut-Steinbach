@@ -633,6 +633,36 @@ em, .accent-i {
   align-items: center;
 }
 
+/* Editoriale Datenzeile im Hero (Koordinaten · Gründung · Höhe) */
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0;
+  margin-top: 2.2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(242, 237, 225, 0.22);
+  max-width: 40rem;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(242, 237, 225, 0.8);
+}
+.hero__meta span { display: inline-flex; align-items: center; }
+.hero__meta span:not(:last-child)::after {
+  content: '';
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--messing-hell);
+  margin-inline: 1.2rem;
+}
+@media (max-width: 40em) {
+  .hero__meta { font-size: 0.6rem; letter-spacing: 0.16em; gap: 0.4rem 0; margin-top: 1.6rem; padding-top: 1.1rem; }
+  .hero__meta span:not(:last-child)::after { margin-inline: 0.8rem; }
+}
+
 .hero__scroll {
   position: absolute;
   right: clamp(1.25rem, 4vw, 4rem);
@@ -1181,6 +1211,16 @@ em, .accent-i {
   line-height: 1.8;
   color: var(--tanne-hell);
   margin-bottom: 1.15rem;
+}
+/* Editorialer Drop-Cap wie in den Magazin-Referenzen */
+.letter__text > p:first-of-type::first-letter {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 3.6em;
+  line-height: 0.72;
+  float: left;
+  padding: 0.06em 0.14em 0 0;
+  color: var(--messing-ink);
 }
 .section--dark .letter__salute { color: var(--linen-hell); }
 .section--dark .letter__text p { color: rgba(242, 237, 225, 0.82); }
