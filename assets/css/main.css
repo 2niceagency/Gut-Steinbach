@@ -352,8 +352,12 @@ em, .accent-i {
   .header-cta { display: none; }
   .menu-btn { letter-spacing: 0.1em; gap: 0.6rem; }
 
-  /* Hero mobil: ruhiger, mehr Luft */
-  .hero__content { padding-bottom: 2.75rem; }
+  /* Hero mobil: ruhiger, mehr Luft + Abstand zum Header */
+  .hero { min-height: 100svh; }
+  .hero .hero__content {
+    padding-top: calc(var(--header-h) + 1rem);
+    padding-bottom: 2.75rem;
+  }
   .hero__eyebrow {
     font-size: 0.64rem;
     letter-spacing: 0.14em;
@@ -1169,6 +1173,56 @@ em, .accent-i {
   font-weight: 400;
 }
 .menu-facts span { font-size: var(--fs-small); color: var(--stein); }
+
+/* ---------- Type-meets-Image (Wort mit Foto gefüllt) ---------- */
+
+.typeimage {
+  background: var(--linen);
+  text-align: center;
+  overflow: hidden;
+}
+.typeimage__word {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(5rem, 26vw, 24rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  margin: 0;
+  /* Foto in die Buchstaben clippen */
+  background-image: url('../img/landschaft-chiemgau.webp');
+  background-size: 130% auto;
+  background-position: center 42%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: var(--tanne);
+  animation: wordpan 24s ease-in-out infinite alternate;
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .typeimage__word { -webkit-text-fill-color: transparent; color: transparent; }
+}
+@keyframes wordpan {
+  from { background-position: 30% 42%; }
+  to   { background-position: 70% 48%; }
+}
+.typeimage__caption {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.4vw, 1.8rem);
+  font-weight: 350;
+  color: var(--tanne-hell);
+  max-width: 30em;
+  margin: clamp(1rem, 3vw, 2.5rem) auto 0;
+  line-height: 1.5;
+}
+.typeimage__eyebrow {
+  font-family: var(--sans);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--messing-ink);
+  margin-bottom: clamp(1.5rem, 4vw, 3rem);
+}
 
 /* ---------- Brief des Direktors ---------- */
 
@@ -1986,7 +2040,7 @@ em, .accent-i {
   }
   .chapter::after, .emph-underline::after { transform: scaleX(1) !important; }
   .marquee { animation: none; flex-wrap: wrap; width: auto; }
-  .hero__scroll, .hero__scroll::after, .hero__eyebrow::before { animation: none; }
+  .hero__scroll, .hero__scroll::after, .hero__eyebrow::before, .typeimage__word { animation: none; }
   .scroll-progress { display: none; }
 }
 
