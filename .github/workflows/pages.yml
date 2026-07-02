@@ -11,9 +11,11 @@ permissions:
   pages: write
   id-token: write
 
+# Deploys nacheinander abarbeiten statt gegenseitig abbrechen
+# (verhindert das Aufstauen der Pages-Warteschlange)
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -30,11 +32,22 @@ jobs:
         with:
           enablement: true
 
+      # Nur die eigentlichen Website-Dateien veröffentlichen (nicht das
+      # impeccable-Tooling, docs etc.) -> schlankeres, schnelleres Artefakt
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp -r assets _site/
+          cp *.html robots.txt sitemap.xml llms.txt _site/ 2>/dev/null || true
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 1800000
+          error_count: 25
