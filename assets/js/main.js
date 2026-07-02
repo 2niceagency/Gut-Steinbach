@@ -98,7 +98,7 @@
     });
 
   /* Wichtige Preise/Zahlen hervorheben (Unterstrich läuft ein) */
-  document.querySelectorAll('.stay-card__price strong, .offer__terms b, .menu-facts b')
+  document.querySelectorAll('.stay-card__price strong, .offer__terms b')
     .forEach(function (el) { el.classList.add('emph-underline'); io.observe(el); });
 
   /* Scroll-Fortschrittsbalken */

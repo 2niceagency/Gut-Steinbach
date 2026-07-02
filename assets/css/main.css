@@ -56,11 +56,11 @@
   --serif: 'Cormorant', 'Times New Roman', serif;
   --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
 
-  /* Fluid type — Cormorant Garamond läuft schmaler/leichter, daher etwas größer */
-  --fs-hero: clamp(3rem, 8.4vw, 7.4rem);
-  --fs-display: clamp(2.5rem, 6vw, 5.4rem);
-  --fs-h2: clamp(2.2rem, 4.8vw, 4rem);
-  --fs-h3: clamp(1.5rem, 2.6vw, 2.15rem);
+  /* Fluid type — Cormorant Garamond: zurückhaltender, mehr Luft */
+  --fs-hero: clamp(2.75rem, 6.6vw, 6rem);
+  --fs-display: clamp(2.4rem, 5.4vw, 4.8rem);
+  --fs-h2: clamp(2.05rem, 4.2vw, 3.5rem);
+  --fs-h3: clamp(1.45rem, 2.5vw, 2rem);
   --fs-lead: clamp(1.1rem, 1.7vw, 1.4rem);
   --fs-body: clamp(1rem, 1.15vw, 1.0625rem);
   --fs-small: 0.8125rem;
@@ -68,7 +68,7 @@
 
   --space-section: clamp(6rem, 12vw, 11rem);
   --space-block: clamp(3rem, 6vw, 5.5rem);
-  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --gutter: clamp(1.6rem, 5vw, 4.5rem);
   --maxw: 90rem;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -103,9 +103,9 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--serif);
-  font-weight: 500;
-  line-height: 1.04;
-  letter-spacing: 0.002em;
+  font-weight: 448;
+  line-height: 1.12;
+  letter-spacing: 0.004em;
   margin: 0 0 0.5em;
   text-wrap: balance;
 }
@@ -551,10 +551,11 @@ em, .accent-i {
 @keyframes linegrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .hero h1 {
   font-size: var(--fs-hero);
-  font-weight: 500;
-  line-height: 1.02;
-  max-width: 14em;
-  margin-bottom: 1.5rem;
+  font-weight: 420;
+  line-height: 1.1;
+  letter-spacing: 0.006em;
+  max-width: 15em;
+  margin-bottom: 1.6rem;
 }
 .hero__sub {
   font-size: var(--fs-lead);
@@ -605,15 +606,18 @@ em, .accent-i {
   .hero__scroll { display: flex; }
 }
 
-/* Zeilen-Reveal für Headlines */
+/* Zeilen-Reveal für Headlines — mit Raum für Unterlängen/Kursiv-Schwünge */
 .lines .line {
   display: block;
   overflow: hidden;
+  padding-bottom: 0.16em;
+  margin-bottom: -0.1em;
 }
 .lines .line > span {
   display: block;
   transform: translateY(115%);
   transition: transform 1.1s var(--ease-out);
+  padding-right: 0.08em;
 }
 .lines.is-in .line > span { transform: none; }
 .lines .line:nth-child(2) > span { transition-delay: 0.12s; }
@@ -966,10 +970,10 @@ em, .accent-i {
 
 .ratio-mark {
   font-family: var(--serif);
-  font-size: clamp(5rem, 13vw, 11rem);
+  font-size: clamp(4.5rem, 11vw, 9.5rem);
   font-weight: 440;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
   color: var(--tanne);
   display: flex;
   align-items: baseline;
@@ -977,6 +981,83 @@ em, .accent-i {
 .ratio-mark i {
   font-style: italic;
   color: var(--messing);
+}
+
+/* 80:80 mit Kontext — große Zahl + erklärende Zeile */
+.ratio-band {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid rgba(28, 43, 34, 0.14);
+}
+@media (min-width: 48em) {
+  .ratio-band { grid-template-columns: auto 1fr; }
+}
+.ratio-caption {
+  max-width: 34ch;
+  margin: 0;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--stein);
+}
+.ratio-caption strong {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.15em;
+  color: var(--tanne);
+  margin-bottom: 0.4rem;
+}
+
+/* Vollflächiger Bild-Moment (verkauft das Gefühl) */
+.showcase {
+  position: relative;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  min-height: clamp(62vh, 78vh, 88vh);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--linen-hell);
+}
+.showcase img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.72);
+  transform: scale(1.06);
+  will-change: transform;
+}
+.showcase::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(19,30,23,0.35) 0%, rgba(19,30,23,0) 35%, rgba(19,30,23,0.6) 100%);
+}
+.showcase__inner {
+  padding-bottom: clamp(3rem, 7vw, 6rem);
+  text-shadow: 0 1px 24px rgba(15,24,18,0.5);
+}
+.showcase__line {
+  font-family: var(--serif);
+  font-weight: 420;
+  font-size: clamp(1.8rem, 4vw, 3.4rem);
+  line-height: 1.16;
+  max-width: 18em;
+  margin: 0 0 0.6rem;
+}
+.showcase__sub {
+  font-size: var(--fs-small);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin: 0;
 }
 
 .menu-facts {
@@ -1013,7 +1094,7 @@ em, .accent-i {
   display: flex;
   align-items: flex-end;
   padding: clamp(2rem, 5vw, 4rem);
-  min-height: 62vh;
+  min-height: 74vh;
   color: var(--linen-hell);
   text-decoration: none;
   overflow: hidden;
@@ -1515,8 +1596,7 @@ em, .accent-i {
 
 /* Wichtige Zahlen/Preise: dezenter Messing-Unterstrich, der beim Reveal einläuft */
 .stay-card__price strong,
-.offer__terms b,
-.menu-facts b {
+.offer__terms b {
   position: relative;
   display: inline-block;
 }
